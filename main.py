@@ -103,6 +103,11 @@ class NavyBattle:
         else:
             contours, h = cv2.findContours(img.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)  # Find contours
         contours = sorted(contours, key=cv2.contourArea, reverse=True)  # Sort by area, descending
+
+        if len(contours) == 0:
+            print("Não detectamos contornos")
+            exit()
+
         polygon = contours[0]  # Largest image
 
         # Use of `operator.itemgetter` with `max` and `min` allows us to get the index of the point
@@ -188,38 +193,52 @@ class NavyBattle:
 
             if is_video:
 
-                self.view(name="Teste", image=frame)
-
-                imReg, h = self.align_images(self.image_match_template, frame)
-
                 teste = self.pre_process_image(img=frame, skip_dilate=True)
 
+                # imReg, h = self.align_images(self.image_match_template, teste)
+
+                # self.view('Pre Process imagem', teste)
+                #
                 te = self.find_corners_of_largest_polygon(teste)
 
+                #
                 oo = self.crop_and_warp(frame, te)
 
+                testeooo = self.pre_process_image(img=oo, skip_dilate=False)
+
+                tewww = self.find_corners_of_largest_polygon(testeooo)
+
+                asasasasas = self.crop_and_warp(oo, tewww)
+
+                self.view(name="Teste", image=asasasasas)
+                #
                 tete = self.get_omr_image(oo)
 
-                print("\n\n\n\n")
+                print(1)
 
-                print("\n\n\n\n")
+                # print(tete)
+
+                #
+                # print("\n\n\n\n")
+                #
+                # print("\n\n\n\n")
 
                 # print(self.matrix_jogo)
                 # print(self.matrix_jogo.shape)
 
-                print("\n\n\n\n")
-
-                print(self.random_matrix)
-                print(self.random_matrix.shape)
+                # print("\n\n\n\n")
+                #
+                # print(self.random_matrix)
+                # print(self.random_matrix.shape)
 
                 # print(np.random.rand(10, 10).astype(int))
 
-                if self.matrix_jogo.all() != tete.all():
+                if self.matrix_jogo_teste.all() == tete.all():
                     print("Deu certo")
-
-                cv2.imwrite("resultado_extract.jpg", oo)
-
-                self.view(name="Teste", image=oo)
+                #
+                # cv2.imwrite("resultado_extract.jpg", oo)
+                #
+                # self.view(name="Teste", image=oo)
 
                 key = cv2.waitKey(20)
 
@@ -234,4 +253,4 @@ class NavyBattle:
 
 if __name__ == '__main__':
     navy = NavyBattle()
-    navy.run(video="teste_video_omr.mp4")
+    navy.run(video="teste_video_omr_sem_animacao.mp4")
