@@ -1,0 +1,13 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="PyUnresolvedReferencesInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredIdentifiers">
+        <list>
+          <option value="pedimos_sni.infra.http.server.__version__" />
+          <option value="pdm_law.infra.task.schedule.get_youtube_videos.GetYoutubeVideos.__setitem__" />
+        </list>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>
